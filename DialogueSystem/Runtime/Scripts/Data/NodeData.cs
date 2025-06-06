@@ -1,18 +1,17 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public abstract class NodeData : IChangeNotifier
     {
         public event Action OnChanged;
-
-        public int Id { get; private set; }
-
+        
+        public readonly int Id;
+        
         [JsonIgnore] public AudioClip AudioResource;
         
         public ObservableList<CommandData> Commands;
@@ -151,7 +150,7 @@ namespace PotikotTools.DialogueSystem
         public virtual async Task LoadResourcesAsync()
         {
             if (!string.IsNullOrEmpty(AudioResourceName))
-                AudioResource = await Components.Database.LoadResourceAsync<AudioClip>(AudioResourceName);
+                AudioResource = await DialoguesComponents.Database.LoadResourceAsync<AudioClip>(AudioResourceName);
         }
 
         public virtual void ReleaseResources()

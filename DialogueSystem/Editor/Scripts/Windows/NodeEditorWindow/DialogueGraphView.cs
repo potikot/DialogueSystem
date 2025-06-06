@@ -5,7 +5,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PotikotTools.DialogueSystem.Editor
+namespace PotikotTools.UniTalks.Editor
 {
     public class DialogueGraphView : GraphView
     {
@@ -37,7 +37,7 @@ namespace PotikotTools.DialogueSystem.Editor
             RegisterCallback<KeyDownEvent>(evt =>
             {
                 if (evt.ctrlKey && evt.keyCode == KeyCode.S)
-                    EditorComponents.Database.SaveDialogue(editorData);
+                    EditorDialogueComponents.Database.SaveDialogue(editorData);
             });
             
             graphViewChanged += HandleGraphViewChanged;

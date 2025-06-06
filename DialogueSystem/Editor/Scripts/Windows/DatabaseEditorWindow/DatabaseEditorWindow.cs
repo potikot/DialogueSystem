@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PotikotTools.DialogueSystem.Editor
+namespace PotikotTools.UniTalks.Editor
 {
     public class DatabaseEditorWindow : EditorWindow
     {
@@ -15,7 +15,7 @@ namespace PotikotTools.DialogueSystem.Editor
 
         private VisualElement _dialoguesContainer;
 
-        [MenuItem("Tools/PotikotTools/DialogueSystem/Database")]
+        [MenuItem("Tools/PotikotTools/UniTalks Database", priority = 1)]
         public static void Open()
         {
             GetWindow<DatabaseEditorWindow>("Dialogue Database");
@@ -208,7 +208,7 @@ namespace PotikotTools.DialogueSystem.Editor
             _dialoguesContainer = new ScrollView()
                 .AddUSSClasses("dialogue-views-container");
 
-            var dialogueDatas = await EditorComponents.Database.LoadAllDialoguesAsync();
+            var dialogueDatas = await EditorDialogueComponents.Database.LoadAllDialoguesAsync();
 
             for (var i = 0; i < dialogueDatas.Count; i++)
             {
@@ -365,7 +365,7 @@ namespace PotikotTools.DialogueSystem.Editor
 
             // edit dialogue button
 
-            var editDialogueButton = new Button(() => EditorComponents.NodeEditorWM.Open(editorDialogueData))
+            var editDialogueButton = new Button(() => EditorDialogueComponents.DialogueEditorWM.Open(editorDialogueData))
             {
                 text = "Edit"
             };
@@ -377,7 +377,7 @@ namespace PotikotTools.DialogueSystem.Editor
 
             // test dialogue button
             
-            var testDialogueButton = new Button(() => EditorComponents.DialogueTestWM.Open(editorDialogueData))
+            var testDialogueButton = new Button(() => EditorDialogueComponents.DialoguePreviewWM.Open(editorDialogueData))
             {
                 text = "Test"
             };
@@ -470,7 +470,7 @@ namespace PotikotTools.DialogueSystem.Editor
                 }
 
                 tags[changedTagIndex] = evt.newValue;
-                await EditorComponents.Database.SaveDialogueAsync(editorDialogueData);
+                await EditorDialogueComponents.Database.SaveDialogueAsync(editorDialogueData);
             }
             
             async void OnDelete()
@@ -488,7 +488,7 @@ namespace PotikotTools.DialogueSystem.Editor
                 
                 c.RemoveFromHierarchy();
                 
-                await EditorComponents.Database.SaveDialogueAsync(editorDialogueData);
+                await EditorDialogueComponents.Database.SaveDialogueAsync(editorDialogueData);
             }
         }
 
@@ -522,7 +522,7 @@ namespace PotikotTools.DialogueSystem.Editor
             tagsContainer.Insert(tagViewIndex, tagView);
             tagsContainer.InsertHorizontalSpace(tagViewIndex + 1, 10f);
 
-            await EditorComponents.Database.SaveDialogueAsync(editorDialogueData);
+            await EditorDialogueComponents.Database.SaveDialogueAsync(editorDialogueData);
             tagView.Q<TextField>().Focus();
         }
         
@@ -581,7 +581,7 @@ namespace PotikotTools.DialogueSystem.Editor
             {
                 if (!canceled)
                 {
-                    var editorDialogueData = await EditorComponents.Database.CreateDialogue(dialogueNameInputField.value);
+                    var editorDialogueData = await EditorDialogueComponents.Database.CreateDialogue(dialogueNameInputField.value);
                     if (editorDialogueData != null)
                     {
                         if (_dialoguesContainer.childCount > 0)
@@ -604,7 +604,7 @@ namespace PotikotTools.DialogueSystem.Editor
             if (EditorUtility.DisplayDialog("Delete dialogue", $"Are you really want to delete dialogue: \"{editorDialogueData.Name}\"?", "Yes", "No"))
             {
                 onDelete?.Invoke();
-                EditorComponents.Database.DeleteDialogue(editorDialogueData);
+                EditorDialogueComponents.Database.DeleteDialogue(editorDialogueData);
             }
         }
     }

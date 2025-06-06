@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine.Device;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     /// <summary>
     /// Use absolute paths to avoid all errors. Relative paths does not work in builds, if working directory changed and if used System.Diagnostics.Process in custom pipelines
@@ -181,14 +181,14 @@ namespace PotikotTools.DialogueSystem
                 return false;
             }
             
-            return path.StartsWith(Components.Database.RelativeRootPath, StringComparison.CurrentCultureIgnoreCase);
+            return path.StartsWith(DialoguesComponents.Database.RelativeRootPath, StringComparison.CurrentCultureIgnoreCase);
         }
         
         // TODO: manage extensions
         public static bool MoveAssetToDatabase(Type assetType, string oldPath, string newFileName = null)
         {
             newFileName ??= Path.GetFileName(oldPath);
-            string newPath = Components.Database.GetProjectRelativeResourcePath(assetType, newFileName);
+            string newPath = DialoguesComponents.Database.GetProjectRelativeResourcePath(assetType, newFileName);
             string newFolder = Path.GetDirectoryName(newPath);
             
             if (!AssetDatabase.IsValidFolder(newFolder))

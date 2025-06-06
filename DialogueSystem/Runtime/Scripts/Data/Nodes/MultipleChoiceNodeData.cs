@@ -1,4 +1,4 @@
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public class MultipleChoiceNodeData : NodeData
     {

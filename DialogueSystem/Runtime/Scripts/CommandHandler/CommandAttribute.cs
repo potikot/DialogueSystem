@@ -1,6 +1,6 @@
 using System;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     /// <summary>
     /// Works only with static methods / fields

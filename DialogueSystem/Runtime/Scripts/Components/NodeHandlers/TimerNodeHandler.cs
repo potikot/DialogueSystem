@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public class TimerNodeHandler : INodeHandler
     {

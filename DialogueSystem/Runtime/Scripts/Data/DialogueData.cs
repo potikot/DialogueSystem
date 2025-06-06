@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public class DialogueData : IChangeNotifier
     {
@@ -52,10 +52,10 @@ namespace PotikotTools.DialogueSystem
         {
             if (string.IsNullOrEmpty(name))
             {
-                if (Components.Database.ContainsDialogue(value))
+                if (DialoguesComponents.Database.ContainsDialogue(value))
                     return false;
             }
-            else if (!Components.Database.TryChangeDialogueName(name, value))
+            else if (!DialoguesComponents.Database.TryChangeDialogueName(name, value))
                 return false;
 
             name = value;

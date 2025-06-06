@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace PotikotTools.DialogueSystem.Editor
+namespace PotikotTools.UniTalks.Editor
 {
     public static class CommandHandlerUtility
     {

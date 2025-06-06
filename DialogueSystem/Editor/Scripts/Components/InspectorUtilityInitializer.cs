@@ -3,7 +3,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace PotikotTools.DialogueSystem.Editor
+namespace PotikotTools.UniTalks.Editor
 {
     [InitializeOnLoad]
     public static class InspectorUtilityInitializer

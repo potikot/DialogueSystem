@@ -1,9 +1,8 @@
 using System;
 using System.Reflection;
 using System.Text;
-using UnityEngine;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public class MethodCommandInfo : ICommandInfo
     {
@@ -78,7 +77,6 @@ namespace PotikotTools.DialogueSystem
         public void Invoke(object[] parameters)
         {
             MethodInfo.Invoke(Context, parameters);
-            Debug.Log("Execute Command " + MethodInfo.Name);
         }
     }
 }

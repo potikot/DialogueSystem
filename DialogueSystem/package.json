@@ -1,7 +1,14 @@
 {
-  "name": "com.potikot.dialogue-system",
+  "name": "com.potikot.unitalks",
   "version": "1.0.0",
-  "displayName": "DialogueSystem",
+  "displayName": "UniTalks",
   "license": "MIT",
-  "repository": "https://github.com/potikot/DialogueSystem"
+  "repository": "https://github.com/potikot/UniTalks",
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
+  "samples": [{
+    "displayName": "Demo",
+    "path": "Samples/Demo"
+  }]
 }

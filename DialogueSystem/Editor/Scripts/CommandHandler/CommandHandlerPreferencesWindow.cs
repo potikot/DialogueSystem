@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace PotikotTools.DialogueSystem.Editor
+namespace PotikotTools.UniTalks.Editor
 {
     public class CommandHandlerPreferencesWindow : EditorWindow
     {
@@ -10,7 +10,7 @@ namespace PotikotTools.DialogueSystem.Editor
         private ListView _excludedFromSearchAssemblyPrefixesListView;
         private ListView _assembliesListView;
         
-        [MenuItem("Tools/PotikotTools/Command Handler Preferences")]
+        [MenuItem("Tools/PotikotTools/Command Handler Preferences", priority = 100)]
         public static void Open()
         {
             GetWindow<CommandHandlerPreferencesWindow>("Command Handler Preferences");

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public class DialogueController
     {
@@ -37,12 +37,12 @@ namespace PotikotTools.DialogueSystem
         {
             if (!nodeType.IsSubclassOf(typeof(NodeData)))
             {
-                DL.LogError($"{nameof(nodeType)} should be a subclass of {nameof(NodeData)}");
+                DL.LogWarning($"{nameof(nodeType)} should be a subclass of {nameof(NodeData)}");
                 return;
             }
             if (!handler.CanHandle(nodeType))
             {
-                DL.LogError($"{nameof(handler)} can't handle node type {nodeType}");
+                DL.LogWarning($"{nameof(handler)} can't handle node type {nodeType}");
                 return;
             }
             
@@ -53,23 +53,22 @@ namespace PotikotTools.DialogueSystem
         {
             if (IsDialogueStarted)
             {
-                DL.LogError("Dialogue is already started");
+                DL.LogWarning("Dialogue is already started");
                 return;
             }
             if (currentDialogueData == null)
             {
-                DL.LogError("Dialogue Data is null");
+                DL.LogWarning("Dialogue Data is null");
                 return;
             }
             
-            DL.Log("Start Dialogue: " + currentDialogueData.Name);
             IsDialogueStarted = true;
             currentDialogueView.Show();
             currentNodeData = currentDialogueData.GetFirstNode();
 
             if (currentNodeData == null)
             {
-                DL.LogError($"Dialogue graph '{currentDialogueData.Name}' is empty");
+                DL.LogWarning($"Dialogue graph '{currentDialogueData.Name}' is empty");
                 return;
             }
             
@@ -86,7 +85,7 @@ namespace PotikotTools.DialogueSystem
         {
             if (!IsDialogueStarted)
             {
-                DL.LogError("Dialogue is not started");
+                DL.LogWarning("Dialogue is not started");
                 return;
             }
             
@@ -167,9 +166,9 @@ namespace PotikotTools.DialogueSystem
         protected virtual async void ExecuteCommandAsync(CommandData command)
         {
             if (command.HasDelay)
-                await Components.CommandHandler.ExecuteWithDelayAsync(command.Text, command.Delay);
+                await DialoguesComponents.CommandHandler.ExecuteWithDelayAsync(command.Text, command.Delay);
             else
-                Components.CommandHandler.Execute(command.Text);
+                DialoguesComponents.CommandHandler.Execute(command.Text);
         }
     }
 }

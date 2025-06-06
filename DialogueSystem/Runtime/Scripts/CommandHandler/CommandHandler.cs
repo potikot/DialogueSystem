@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     // TODO: implement async logic
     public class CommandHandler
@@ -20,7 +20,6 @@ namespace PotikotTools.DialogueSystem
         {
             _commands = new List<ICommandInfo>(InitialCommandsListCapacity);
             SetupCommands();
-            Debug.Log("Setup Commands");
         }
 
         private void SetupCommands()
@@ -31,11 +30,11 @@ namespace PotikotTools.DialogueSystem
             foreach (string assemblyName in assemblyNames)
                 assemblies.Add(Assembly.Load(assemblyName));
 
-            var log = new StringBuilder()
-                .AppendLine($"Loaded commands from assemblies({assemblies.Count}):");
+            // var log = new StringBuilder()
+            //     .AppendLine($"Loaded commands from assemblies({assemblies.Count}):");
             foreach (Assembly assembly in assemblies)
             {
-                log.AppendLine(assembly.FullName);
+                // log.AppendLine(assembly.FullName);
                 foreach (Type type in assembly.GetTypes())
                 {
                     AddMethods(type);
@@ -43,7 +42,7 @@ namespace PotikotTools.DialogueSystem
                 }
             }
             
-            Debug.Log(log.ToString());
+            // Debug.Log(log.ToString());
         }
 
         public void Execute(string commandName, params object[] parameters)

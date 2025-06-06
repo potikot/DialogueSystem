@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
-namespace PotikotTools.DialogueSystem.Editor
+namespace PotikotTools.UniTalks.Editor
 {
     public class EditorDialogueData
     {
@@ -79,8 +79,8 @@ namespace PotikotTools.DialogueSystem.Editor
             if (!RuntimeData.TrySetName(value))
                 return false;
 
-            string oldPath = Path.Combine(Components.Database.DialoguesRelativeRootPath, previousName);
-            string newPath = Path.Combine(Components.Database.DialoguesRelativeRootPath, Name);
+            string oldPath = Path.Combine(DialoguesComponents.Database.DialoguesRelativeRootPath, previousName);
+            string newPath = Path.Combine(DialoguesComponents.Database.DialoguesRelativeRootPath, Name);
 
             string error = AssetDatabase.MoveAsset(oldPath, newPath);
 
@@ -90,7 +90,7 @@ namespace PotikotTools.DialogueSystem.Editor
                 return false;
             }
             
-            await EditorComponents.Database.SaveDialogueAsync(this);
+            await EditorDialogueComponents.Database.SaveDialogueAsync(this);
             OnNameChanged?.Invoke(value);
             return true;
         }

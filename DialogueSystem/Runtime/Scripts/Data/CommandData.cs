@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public enum CommandExecutionOrder
     {

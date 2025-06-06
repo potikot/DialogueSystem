@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public class ConnectionDataConverter : JsonConverter<ConnectionData>
     {
@@ -35,7 +35,7 @@ namespace PotikotTools.DialogueSystem
                 int fromId = (int)from;
                 int toId = (int)to;
 
-                Components.NodeBinder.AddConnection(fromId, toId);
+                DialoguesComponents.NodeBinder.AddConnection(fromId, toId);
             }
 
             return connectionData;

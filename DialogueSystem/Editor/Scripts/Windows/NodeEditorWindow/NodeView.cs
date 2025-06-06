@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace PotikotTools.DialogueSystem.Editor
+namespace PotikotTools.UniTalks.Editor
 {
     public abstract class NodeView<T> : Node, INodeView where T : NodeData
     {
@@ -223,7 +223,7 @@ namespace PotikotTools.DialogueSystem.Editor
             var audioField = new ObjectField("Audio")
             {
                 objectType = typeof(AudioClip),
-                value = Components.Database.LoadResource<AudioClip>(data.AudioResourceName)
+                value = DialoguesComponents.Database.LoadResource<AudioClip>(data.AudioResourceName)
             };
 
             audioField.RegisterValueChangedCallback(evt => HandleAudioChange(evt, audioField));

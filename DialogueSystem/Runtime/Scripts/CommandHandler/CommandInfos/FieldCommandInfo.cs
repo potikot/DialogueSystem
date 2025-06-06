@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public class FieldCommandInfo : ICommandInfo
     {

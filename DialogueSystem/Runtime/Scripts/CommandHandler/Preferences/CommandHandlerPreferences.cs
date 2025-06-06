@@ -1,52 +1,72 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
 
-namespace PotikotTools.DialogueSystem
+namespace PotikotTools.UniTalks
 {
     public static class CommandHandlerPreferences
     {
         public const BindingFlags ReflectionBindingFlags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+        public const string FileName = "CommandHandlerRuntimePreferences";
+        
+        private static CommandHandlerPreferencesSO _data;
 
-        private static CommandHandlerPreferencesSO _preferencesSO;
-
-        public static CommandHandlerPreferencesSO PreferencesSO
+        public static CommandHandlerPreferencesSO Data
         {
             get
             {
-                if (_preferencesSO == null)
+                if (_data == null)
                 {
-                    _preferencesSO = Resources.Load<CommandHandlerPreferencesSO>("CommandHandlerRuntimePreferences");
+                    _data = Resources.Load<CommandHandlerPreferencesSO>(FileName);
+
+                    if (_data == null)
+                    {
+                        _data = ScriptableObject.CreateInstance<CommandHandlerPreferencesSO>();
+                        
+                        #if UNITY_EDITOR
+
+                        string relativePath = "Assets/Resources/UniTalks/Configs";
+                        string path = FileUtility.GetAbsolutePath(relativePath);
                     
-                    if (_preferencesSO == null)
-                        _preferencesSO = ScriptableObject.CreateInstance<CommandHandlerPreferencesSO>();
+                        Directory.CreateDirectory(path);
+                        UnityEditor.AssetDatabase.ImportAsset(relativePath);
+                        UnityEditor.AssetDatabase.CreateAsset(Data, $"{relativePath}/{FileName}.asset");
+                        
+                        #endif
+                    }
                 }
                 
-                return _preferencesSO;
+                return _data;
             }
         }
         
         public static bool ExcludeFromSearchAssemblies
         {
-            get => PreferencesSO.ExcludeDefaultAssemblies;
-            set => PreferencesSO.ExcludeDefaultAssemblies = value;
+            get => Data.ExcludeDefaultAssemblies;
+            set => Data.ExcludeDefaultAssemblies = value;
         }
         
-        public static List<string> ExcludedFromSearchAssemblyPrefixes => PreferencesSO.ExcludedAssemblyPrefixes;
-        public static List<string> CommandAttributeUsingAssemblies => PreferencesSO.CommandAttributeUsingAssemblies;
+        public static List<string> ExcludedFromSearchAssemblyPrefixes => Data.ExcludedAssemblyPrefixes;
+        public static List<string> CommandAttributeUsingAssemblies => Data.CommandAttributeUsingAssemblies;
 
         #if UNITY_EDITOR
 
         public static void Save()
         {
-            EditorUtility.SetDirty(PreferencesSO);
-            AssetDatabase.SaveAssetIfDirty(PreferencesSO);
+            if (Data == null)
+                return;
+
+            UnityEditor.EditorUtility.SetDirty(Data);
+            UnityEditor.AssetDatabase.SaveAssetIfDirty(Data);
         }
 
         public static void Reset()
         {
-            PreferencesSO.Reset();
+            if (Data == null)
+                return;
+
+            Data.Reset();
             Save();
         }
         

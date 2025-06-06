@@ -1,4 +1,4 @@
-namespace PotikotTools.DialogueSystem.Editor
+namespace PotikotTools.UniTalks.Editor
 {
     public static class EditorSymbols
     {

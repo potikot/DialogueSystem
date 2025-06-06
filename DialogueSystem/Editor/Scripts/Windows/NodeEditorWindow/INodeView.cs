@@ -1,6 +1,6 @@
 using System;
 
-namespace PotikotTools.DialogueSystem.Editor
+namespace PotikotTools.UniTalks.Editor
 {
     public interface INodeView
     {
